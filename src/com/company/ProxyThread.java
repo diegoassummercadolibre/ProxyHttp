@@ -13,7 +13,8 @@ public class ProxyThread extends Thread {
 
     public void run() {
 
-        String log = new String();
+        String logRequest = new String();
+        String logResponse = new String();
 
         try {
 
@@ -23,13 +24,12 @@ public class ProxyThread extends Thread {
             int len = incommingIS.read(b);
 
             if (len > 0) {
-                log = new String(b, 0, len);
-                String[] logArray = log.split(" ");
+                logRequest = new String(b, 0, len);
+                String[] logArray = logRequest.split(" ");
 
                 if (logArray[0].equals("GET")){
 
-                    LogHelper.writeLog(log);
-
+                    LogHelper.writeLog("REQUEST", logRequest);
                     String host = logArray[3].split("\\r")[0];
 
                     // Write request
@@ -40,22 +40,12 @@ public class ProxyThread extends Thread {
                     // Copy response
                     OutputStream incommingOS = clientSocket.getOutputStream();
                     InputStream outgoingIS = socket.getInputStream();
-                    InputStream is = socket.getInputStream();
                     for (int length; (length = outgoingIS.read(b)) != -1; ) {
                         incommingOS.write(b, 0, length);
                     }
 
-
-                    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = rd.readLine()) != null) {
-                        response.append(line);
-                        response.append('\r');
-                    }
-
-                    rd.close();
-                    LogHelper.writeLog(response.toString());
+                    logResponse = new String(b, 0, len);
+                    LogHelper.writeLog("RESPONSE", logResponse);
 
                     incommingOS.close();
                     outgoingIS.close();
@@ -65,7 +55,7 @@ public class ProxyThread extends Thread {
                     socket.close();
                 }
                 else{
-                        incommingIS.close();
+                    incommingIS.close();
                 }
             }
             else {
@@ -73,7 +63,8 @@ public class ProxyThread extends Thread {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println(log);
+            System.out.println(logRequest);
+            System.out.println(logResponse);
         } finally {
             try {
                 clientSocket.close();
