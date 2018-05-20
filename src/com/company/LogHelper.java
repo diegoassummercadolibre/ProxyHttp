@@ -11,19 +11,21 @@ public class LogHelper{
     private static final String FILE_NAME = "ProxyHttp.log";
     private static final String NEW_LINE = System.getProperty("line.separator");
     private static final String SEPARATOR = "----------------------------------------------------------";
+
     private static final File _file = new File(FILE_NAME);
+    private static StringBuilder _logAux;
 
     public static void writeLog(String log) throws IOException {
-        StringBuilder logAux = new StringBuilder();
+        _logAux = new StringBuilder();
 
         if(!_file.exists())
             _file.createNewFile();
 
-        logAux.append(getLogHead());
-        logAux.append(log);
+        _logAux.append(getLogHead());
+        _logAux.append(log);
 
-        Files.write(Paths.get(_file.getName()), logAux.toString().getBytes(), StandardOpenOption.APPEND);
-        System.out.println(logAux.toString());
+        Files.write(Paths.get(_file.getName()), _logAux.toString().getBytes(), StandardOpenOption.APPEND);
+        System.out.println(_logAux.toString());
     }
 
     private static String getLogHead(){
