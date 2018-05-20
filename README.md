@@ -1,18 +1,17 @@
 # ProxyHttp
 
-Este proyecto corresponde a un ejercicio de un Proxy HTTP desarrollado en Java.
+Este proyecto corresponde a un ejercicio de **Proxy HTTP** desarrollado en Java.
 
 ## Instrucciones de uso:
- - Descargar el proyecto
- - Abrir el mismo con algun IDE de java, como puede ser Intellij.
- - Presionar ejecuar (para Intellij puede presionar F10)
- - El sistema solicitará un numero de puerto, en cual la aplicacion escuchará las peticiones (Ej.: 8080).
- - Configurar en Proxy del siguiente modo:
+ - Descargar el proyecto.
+ - Abrir el mismo con algún IDE de java, como puede ser Intellij.
+ - Ejecutar el proyecto.
+ - Configurar el Proxy en su PC del siguiente modo:
  	- IP: 127.0.0.1
-	- Puesto: *El número de puerto establecido ateriormente (Ej.: 8080)*
-- Abrir el navegador web y dirigirse a la pagina http://example.org/.
+	- Puerto: 8080
+- Abrir el navegador web y dirigirse a la página http://example.org/.
 - Abrir el explorador de Windows y dirigirse a la carpeta del proyecto, como puede ser *C:\Users\userName\IdeaProjects\ProxyHttp*
-- En dicha carpeta se encontrará un arcicho ProxyHttp.log el cual contiene la solicitud y respuesta a la pagina web
+- En dicha carpeta se encontrará un arcicho ProxyHttp.log el cual contiene la solicitud (request) y respuesta (response) a la página web solicitada.
 
 ## Arquitectura del Proyecto:
 
