@@ -2,8 +2,11 @@ package com.company;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 
-public class ProxyThread extends Thread {
+public class ProxyThread implements Runnable {
 
     private final Socket clientSocket;
 
@@ -32,19 +35,21 @@ public class ProxyThread extends Thread {
                     LogHelper.writeLog("REQUEST", logRequest);
                     String host = logArray[3].split("\\r")[0];
 
+
                     // Write request
                     Socket socket = new Socket(host, 80);
                     OutputStream outgoingOS = socket.getOutputStream();
                     outgoingOS.write(b, 0, len);
 
+
                     // Copy response
                     OutputStream incommingOS = clientSocket.getOutputStream();
                     InputStream outgoingIS = socket.getInputStream();
-                    for (int length; (length = outgoingIS.read(b)) != -1; ) {
-                        incommingOS.write(b, 0, length);
+                    for (int responseLength; (responseLength = outgoingIS.read(b)) != -1; ) {
+                        incommingOS.write(b, 0, responseLength);
                     }
 
-                    logResponse = new String(b, 0, len);
+                    logResponse = new String(b, StandardCharsets.UTF_8);
                     LogHelper.writeLog("RESPONSE", logResponse);
 
                     incommingOS.close();

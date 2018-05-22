@@ -16,7 +16,7 @@ public class Main {
             System.exit(-1);
         }
         while (listening) {
-            new ProxyThread(serverSocket.accept()).start();
+            new Thread(new ProxyThread(serverSocket.accept())).start();
         }
         serverSocket.close();
     }
