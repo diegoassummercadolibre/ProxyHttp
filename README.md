@@ -19,7 +19,7 @@ Este proyecto corresponde a un ejercicio de **Proxy HTTP** desarrollado en Java.
  - Un ProxyThread, es un hilo recibe el socket del servidor enviado por el Main y realiza la comunicacion entre el cliente y el servidor.
  - Un LogHelper encargado de crear el archivo log (ProxyHTTP.log) y escribir sobre el mismo.
 	
-## Limitaciones:
+## Comsideraciones:
  - Solo funciona con paginas web no seguras como por ejemplo: http://example.org/, http://www.lavoz.com.ar/, http://ionicons.com/.
  - En algunos casos puede tomarle varios minutos en procesar las peticiones y mostrar la pagina.
 	
