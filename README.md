@@ -20,6 +20,6 @@ Este proyecto corresponde a un ejercicio de **Proxy HTTP** desarrollado en Java.
  - Un LogHelper encargado de crear el archivo log (ProxyHTTP.log) y escribir sobre el mismo.
 	
 ## Comsideraciones:
- - Solo funciona con paginas web no seguras como por ejemplo: http://example.org/, http://www.lavoz.com.ar/, http://ionicons.com/.
+ - Solo funciona con paginas web no seguras como por ejemplo: http://example.org/, http://www.lavoz.com.ar/, etc.
  - En algunos casos puede tomarle varios minutos en procesar las peticiones y mostrar la pagina.
 	
