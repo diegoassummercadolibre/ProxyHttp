@@ -10,7 +10,7 @@ Este proyecto corresponde a un ejercicio de **Proxy HTTP** desarrollado en Java.
 	- Puerto: 8080
 - Abrir el navegador web y dirigirse a la página http://example.org/.
 - Abrir el explorador de Windows y dirigirse a la carpeta del proyecto, como puede ser *C:\Users\userName\IdeaProjects\ProxyHttp*
-- En dicha carpeta se encontrará un arcicho ProxyHttp.log el cual contiene la solicitud (request) y respuesta (response) a la página web solicitada.
+- En dicha carpeta se encontrará un arcicho ProxyHttp.log el cual contiene las peticiones (requests) y respuestas (responses) a la/s página/s web solicitada/s.
 
 ## Arquitectura del Proyecto:
 
@@ -20,6 +20,6 @@ Este proyecto corresponde a un ejercicio de **Proxy HTTP** desarrollado en Java.
  - Un LogHelper encargado de crear el archivo log (ProxyHTTP.log) y escribir sobre el mismo.
 	
 ## Comsideraciones:
- - Solo funciona con paginas web no seguras como por ejemplo: http://example.org/, http://www.lavoz.com.ar/, http://ionicons.com/.
+ - Solo funciona con paginas web no seguras como por ejemplo: http://example.org/, http://www.lavoz.com.ar/, etc.
  - En algunos casos puede tomarle varios minutos en procesar las peticiones y mostrar la pagina.
 	
