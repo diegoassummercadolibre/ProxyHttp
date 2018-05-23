@@ -2,9 +2,9 @@ package com.company;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.URL;
-import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProxyThread implements Runnable {
 
@@ -21,35 +21,32 @@ public class ProxyThread implements Runnable {
 
         try {
 
-            // Read request
             InputStream incommingIS = clientSocket.getInputStream();
             byte[] b = new byte[8196];
             int len = incommingIS.read(b);
 
             if (len > 0) {
                 logRequest = new String(b, 0, len);
-                String[] logArray = logRequest.split(" ");
+                Matcher get = Pattern.compile("^GET").matcher(logRequest);
 
-                if (logArray[0].equals("GET")){
+                if(get.find()){
 
                     LogHelper.writeLog("REQUEST", logRequest);
-                    String host = logArray[3].split("\\r")[0];
+                    Matcher hostMatch = Pattern.compile("Host: (.*)").matcher(logRequest);
+                    hostMatch.find();
+                    String host = hostMatch.group(1);
 
-
-                    // Write request
                     Socket socket = new Socket(host, 80);
                     OutputStream outgoingOS = socket.getOutputStream();
                     outgoingOS.write(b, 0, len);
 
-
-                    // Copy response
                     OutputStream incommingOS = clientSocket.getOutputStream();
                     InputStream outgoingIS = socket.getInputStream();
                     for (int responseLength; (responseLength = outgoingIS.read(b)) != -1; ) {
                         incommingOS.write(b, 0, responseLength);
                     }
 
-                    logResponse = new String(b, StandardCharsets.UTF_8);
+                    logResponse = new String(b);
                     LogHelper.writeLog("RESPONSE", logResponse);
 
                     incommingOS.close();
