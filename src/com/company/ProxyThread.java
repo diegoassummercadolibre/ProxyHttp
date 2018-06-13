@@ -47,6 +47,32 @@ public class ProxyThread implements Runnable {
                     }
 
                     logResponse = new String(b);
+
+
+
+                    /*OutputStream incommingOS = clientSocket.getOutputStream();
+                    InputStream outgoingIS = socket.getInputStream();
+                    DataInputStream serverDataInputStream = new DataInputStream(outgoingIS);
+                    boolean serverMessagePending = true;
+
+                    while(serverMessagePending) {
+                        int tempSize = outgoingIS.available();
+                        if (tempSize > 0) {
+                            byte[] tempArr = new byte[tempSize];
+                            serverDataInputStream.read(tempArr, 0, tempSize);
+                            logResponse += new String(tempArr);
+                            incommingOS.write(tempArr, 0, tempSize);
+                        } else {
+                            Thread.sleep(1000);
+                            tempSize = serverDataInputStream.available();
+                            if (tempSize == 0) serverMessagePending = false;
+
+                        }
+                    }*/
+
+
+
+
                     LogHelper.writeLog("RESPONSE", logResponse);
 
                     incommingOS.close();
